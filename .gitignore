@@ -19,3 +19,4 @@ dist/
 app/google-services.json
 *.png
 !app/src/main/res/**/*.png
+keystore/
