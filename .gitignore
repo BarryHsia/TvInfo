@@ -16,3 +16,6 @@ dist/
 .env*
 !.env.example
 .cache/
+app/google-services.json
+*.png
+!app/src/main/res/**/*.png

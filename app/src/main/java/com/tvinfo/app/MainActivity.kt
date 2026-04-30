@@ -36,6 +36,8 @@ import com.tvinfo.app.ui.components.*
 import com.tvinfo.app.ui.screens.*
 import com.tvinfo.app.ui.theme.AppColors
 import com.tvinfo.app.ui.theme.TvInfoTheme
+import com.google.firebase.analytics.FirebaseAnalytics
+import com.google.firebase.analytics.logEvent
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -45,7 +47,8 @@ class MainActivity : ComponentActivity() {
         setContent {
             TvInfoTheme {
                 val metrics = remember { SystemInfoProvider.collect(this@MainActivity) }
-                TvInfoApp(metrics)
+                val analytics = remember { FirebaseAnalytics.getInstance(this@MainActivity) }
+                TvInfoApp(metrics, analytics)
             }
         }
     }
@@ -55,10 +58,17 @@ private const val NAV_COLLAPSED = 72
 private const val NAV_EXPANDED = 240
 
 @Composable
-fun TvInfoApp(metrics: SystemMetrics) {
+fun TvInfoApp(metrics: SystemMetrics, analytics: FirebaseAnalytics) {
     var activeTab by remember { mutableStateOf("overview") }
     var currentTime by remember { mutableLongStateOf(System.currentTimeMillis()) }
     var sidebarExpanded by remember { mutableStateOf(false) }
+
+    // Log tab switch to Firebase Analytics
+    LaunchedEffect(activeTab) {
+        analytics.logEvent("tab_switch") {
+            param("tab_name", activeTab)
+        }
+    }
 
     val navFocusRequesters = remember { NAV_ITEMS.map { FocusRequester() } }
     val contentFocusRequester = remember { FocusRequester() }
