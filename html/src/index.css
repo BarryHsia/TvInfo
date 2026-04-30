@@ -1,0 +1,70 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
+  --color-bg: #0a0b0e;
+  --color-surface: #14161b;
+  --color-border: rgba(255, 255, 255, 0.08);
+  --color-accent: #22d3ee;
+  --color-accent-muted: rgba(34, 211, 238, 0.1);
+}
+
+@layer base {
+  body {
+    @apply bg-[#030406] text-gray-400 font-sans antialiased overflow-hidden;
+    background: radial-gradient(circle at 50% -20%, #1a1f2e 0%, #030406 100%);
+  }
+
+  /* TV Focus System */
+  .tv-focus {
+    @apply transition-all duration-300 ring-0;
+  }
+
+  .tv-focus:hover, .tv-focus:focus-visible {
+    @apply outline-none ring-4 ring-accent/30 bg-surface/80 scale-[1.02] shadow-[0_0_40px_-10px_rgba(34,211,238,0.2)];
+    border-color: var(--color-accent);
+  }
+
+  /* Background Mesh */
+  .bg-mesh {
+    background-image: 
+      radial-gradient(at 0% 0%, rgba(34, 211, 238, 0.05) 0px, transparent 50%),
+      radial-gradient(at 100% 100%, rgba(59, 130, 246, 0.05) 0px, transparent 50%);
+  }
+}
+
+@layer components {
+  .bento-card {
+    @apply bg-white/[0.03] border border-white/[0.06] rounded-[24px] p-8 backdrop-blur-sm transition-all duration-300;
+  }
+
+  .bento-card:hover {
+    @apply border-gray-700 bg-[#1a1d23];
+  }
+
+  .stat-label {
+    @apply text-[10px] font-mono uppercase tracking-[0.2em] text-gray-500 mb-1;
+  }
+
+  .stat-value {
+    @apply text-xl font-medium text-gray-100 font-sans tracking-tight;
+  }
+
+  .mono-value {
+    @apply font-mono text-sm text-accent;
+  }
+}
+
+/* Custom Scrollbar for TV if needed */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  @apply bg-gray-800 rounded-full;
+}
+

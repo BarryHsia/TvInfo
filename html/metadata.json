@@ -1,0 +1,6 @@
+{
+  "name": "TV System Analyzer",
+  "description": "A refined system information dashboard for Android TV and Google TV devices, providing real-time hardware and software insights.",
+  "requestFramePermissions": [],
+  "majorCapabilities": []
+}
